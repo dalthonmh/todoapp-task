@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import jakarta.servlet.http.HttpServletRequest;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -28,14 +31,25 @@ public class TaskController {
 
   // POST create a task
   @PostMapping
-  public ResponseEntity<Task> create(@RequestBody Task task) {
+  public ResponseEntity<Task> create(
+    @RequestBody Task task,
+    HttpServletRequest request) {
+
+    String username = (String) request.getAttribute("username");
+    task.setUsername(username);
     return ResponseEntity.status(HttpStatus.CREATED)
     .body(service.create(task));
   }
 
   // PUT update a task
   @PutMapping("/{id}")
-  public ResponseEntity<Task> update(@PathVariable Long id, @RequestBody Task task) {
+  public ResponseEntity<Task> update(
+    @PathVariable Long id,
+    @RequestBody Task task,
+    HttpServletRequest request) {
+
+    String username = (String) request.getAttribute("username");
+    task.setUsername(username);
     return ResponseEntity.ok(service.update(id, task));
   }
 

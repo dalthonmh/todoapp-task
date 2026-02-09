@@ -16,7 +16,7 @@ spring:
         format_sql: true
 
 server:
-  port: ${SERVER_PORT:8080}
+  port: ${SERVER_PORT:8085}
 
 management:
   endpoints:
@@ -29,6 +29,8 @@ management:
   health:
     db:
       enabled: true
+jwt:
+  secret: secret
 
 ---
 # Development Profile - H2 Database
