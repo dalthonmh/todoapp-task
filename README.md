@@ -1,10 +1,9 @@
-# Transactions Microservice API
+# ToDo-APP Task
 
-REST API for transactions with Spring Boot and PostgreSQL.
+Microservice for tasks app using Java and Spring Boot.
 
 ## Requirements
 
-- Docker Desktop
 - Java 21
 - Maven 3.9+
 - Docker & Docker Compose
@@ -14,33 +13,31 @@ REST API for transactions with Spring Boot and PostgreSQL.
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/dalthonmh/java-transactions.git
-cd java-transactions
+git clone https://github.com/dalthonmh/todoapp-task.git
+cd todoapp-task
 ```
 
-### 2. Start the service
+### 2. Start application
 
 ```bash
-docker-compose up -d
+./mvnw spring-boot:run
 ```
 
-### 3. Verify
+### Health Check
 
 ```bash
-curl http://localhost:8080/api/tasks/health
+curl http://localhost:8080/actuator/health
 ```
 
-## Check endpoints
-
-### Create transaction
+### Create tasks
 
 ```bash
 curl -X POST http://localhost:8080/api/tasks \
   -H "Content-Type: application/json" \
   -d '{
-    "title": "Deploy java app",
+    "title": "My task is here",
     "completed": true,
-    "username": "dalthon"
+    "username": "dalthonmh"
   }'
 ```
 
@@ -53,54 +50,7 @@ curl http://localhost:8080/api/tasks
 ### Transactions by user
 
 ```bash
-curl http://localhost:8080/api/v1/transactions/user/user001
+curl http://localhost:8080/api/tasks/1
 ```
 
-### Health Check
-
-```bash
-curl http://localhost:8080/actuator/health
-```
-
-## Local development
-
-### 1. Start PostgreSQL
-
-```bash
-docker run -d \
-  --name postgres \
-  -e POSTGRES_DB=transactionsdb \
-  -e POSTGRES_USER=postgres \
-  -e POSTGRES_PASSWORD=postgres \
-  -p 5432:5432 \
-  postgres:16-alpine
-```
-
-### 2. Start application
-
-```bash
-./mvnw spring-boot:run
-```
-
-## Environment
-
-- `DB_HOST`: PostgreSQL Host (default: localhost)
-- `DB_PORT`: PostgreSQL port (default: 5432)
-- `DB_NAME`: Database name (default: transactionsdb)
-- `DB_USER`: PostgreSQL user (default: postgres)
-- `DB_PASSWORD`: PostgreSQL password
-- `SERVER_PORT`: Default port application (default: 8080)
-
-### 3. Build the package
-
-```bash
-./mvnw clean package
-```
-
-### 4. Upload the package to registry
-
-```bash
-./mvnw clean deploy
-```
-
-> Note: To avoid the test, add `-DskipTests` to the ./mvnw sript as the last argument.
+---
