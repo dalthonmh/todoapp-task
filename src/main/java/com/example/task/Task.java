@@ -21,9 +21,16 @@ public class Task {
   private Long id;
   
   private String title;
-  private boolean completed = false;
+  private Boolean completed = false;
   private String username;
   
+  @PrePersist
+  private void setDefaults() {
+    if (completed == null) {
+      completed = false;
+    }
+  }
+
   @CreatedDate
   @Column(updatable = false)
   private LocalDateTime createdAt;

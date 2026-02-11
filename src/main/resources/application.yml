@@ -29,8 +29,9 @@ management:
   health:
     db:
       enabled: true
+# note: secret must be at least 256 bits (32 characters) for HS256 algorithm
 jwt:
-  secret: secret
+  secret: ${JWT_SECRET:todoapp-my-secret-dalthonmh-jwtkey}
 
 ---
 # Development Profile - H2 Database

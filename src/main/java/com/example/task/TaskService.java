@@ -29,7 +29,7 @@ public class TaskService {
     if (taskBody.getUsername() != null) {
       task.setUsername(taskBody.getUsername());
     }
-    task.setCompleted(taskBody.isCompleted());
+    task.setCompleted(taskBody.getCompleted());
     
     return repository.save(task);
   }

@@ -36,6 +36,7 @@ public class JwtInterceptor implements HandlerInterceptor {
     }
 
     String token = authHeader.substring(7);
+    
     String username = jwtUtil.extractUsername(token);
 
     if (username == null) {
