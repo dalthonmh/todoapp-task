@@ -47,25 +47,25 @@ class TaskServiceTest {
       task2.setId(2L);
       task2.setTitle("Second task");
 
-      when(repository.findAll()).thenReturn(Arrays.asList(task, task2));
+      when(repository.findAllByOrderByCompletedAscCreatedAtDesc()).thenReturn(Arrays.asList(task, task2));
 
       List<Task> result = service.getAll();
 
       assertThat(result).hasSize(2);
       assertThat(result.get(0).getTitle()).isEqualTo("Test task");
       assertThat(result.get(1).getTitle()).isEqualTo("Second task");
-      verify(repository, times(1)).findAll();
+      verify(repository, times(1)).findAllByOrderByCompletedAscCreatedAtDesc();
     }
 
     @Test
     @DisplayName("should return empty list when no tasks exist")
     void shouldReturnEmptyList() {
-      when(repository.findAll()).thenReturn(List.of());
+      when(repository.findAllByOrderByCompletedAscCreatedAtDesc()).thenReturn(List.of());
 
       List<Task> result = service.getAll();
 
       assertThat(result).isEmpty();
-      verify(repository, times(1)).findAll();
+      verify(repository, times(1)).findAllByOrderByCompletedAscCreatedAtDesc();
     }
   }
 

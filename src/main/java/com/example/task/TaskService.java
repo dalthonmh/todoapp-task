@@ -11,7 +11,9 @@ public class TaskService {
   private TaskRepository repository;
 
   public List<Task> getAll() {
-    return repository.findAll();
+    // Consistent ordering with todoapp-core:
+    // incomplete tasks first (top), completed tasks at the bottom.
+    return repository.findAllByOrderByCompletedAscCreatedAtDesc();
   }
 
   public Task create(Task task) {
